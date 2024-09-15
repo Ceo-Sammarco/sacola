@@ -1,0 +1,69 @@
+
+
+nx create-expo-app@latest sacola -t tabs
+
+yarn add firebase @react-native-async-storage/async-storage
+
+firebase-config.ts<--
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { initializeAuth, getReactNativePersistence } from 'firebase/auth';
+import ReactNativeAsyncStorage from '@react-native-async-storage/async-storage';
+import { getFirestore } from "firebase/firestore";
+import { getStorage } from 'firebase/storage';
+
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+const firebaseConfig = {
+   apiKey: process.env.EXPO_PUBLIC_firebaseConfig_apiKey,
+   authDomain: process.env.EXPO_PUBLIC_firebaseConfig_authDomain,
+   databaseURL: process.env.EXPO_PUBLIC_firebaseConfig_databaseURL,
+   projectId: process.env.EXPO_PUBLIC_firebaseConfig_projectId,
+   storageBucket: process.env.EXPO_PUBLIC_firebaseConfig_storageBucket,
+   messagingSenderId: process.env.EXPO_PUBLIC_firebaseConfig_messagingSenderId,
+   appId: process.env.EXPO_PUBLIC_firebaseConfig_appId,
+   measurementId: process.env.EXPO_PUBLIC_firebaseConfig_measurementId
+};
+ 
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+export const auth = initializeAuth(app, {
+  persistence: getReactNativePersistence(ReactNativeAsyncStorage)
+});
+export const db = getFirestore(app);
+export const storage = getStorage(app);
+-->
+
+.env<--
+# EXPO_PUBLIC_API_URL=https://staging.example.com
+# EXPO_PUBLIC_API_KEY=abc123
+
+# const firebaseConfig = {
+  EXPO_PUBLIC_firebaseConfig_apiKey= ""
+  EXPO_PUBLIC_firebaseConfig_authDomain= "",
+  EXPO_PUBLIC_firebaseConfig_databaseURL= "",
+  EXPO_PUBLIC_firebaseConfig_projectId= "",
+  EXPO_PUBLIC_firebaseConfig_storageBucket= "",
+  EXPO_PUBLIC_firebaseConfig_messagingSenderId= "",
+  EXPO_PUBLIC_firebaseConfig_appId= "",
+  EXPO_PUBLIC_firebaseConfig_measurementId= ""
+# };
+-->
+
+npx expo customize metro.config.js
+
+metro.config.js<--
+# add this line
+config.resolver.sourceExts.push( "cjs" );
+-->
+
+tsconfig.json<--
+# add this inside path: []
+   "@firebase/auth": ["./node_modules/@firebase/auth/dist/index.rn.d.ts"],
+-->
+
+create index.tsx
+define index in _layout
+
