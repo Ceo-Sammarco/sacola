@@ -3,10 +3,9 @@
 import { auth } from "@/firebase-config";
 import { router } from "expo-router";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
-import { useState } from "react";
 
 
-async function SignIn( email: string, password: string ) {
+export async function SignIn( email: string, password: string ) {
    try {
       const 
          user = await signInWithEmailAndPassword(
@@ -22,7 +21,7 @@ async function SignIn( email: string, password: string ) {
    }
 }
 
-async function SignUp( email: string, password: string ) {
+export async function SignUp( email: string, password: string ) {
    try {
       const 
          user = await createUserWithEmailAndPassword(
@@ -36,13 +35,4 @@ async function SignUp( email: string, password: string ) {
       console.error( "SignUp() err: \n\n\n", err );
       alert( `SignUp() err: \n\n\n${ err }` );
    }
-}
-
-
-export default function useAuth() {
-   const 
-      [ Email, setEmail ] = useState()
-      ,
-      [ Password, setPassword ] = useState()
-   ;
 }

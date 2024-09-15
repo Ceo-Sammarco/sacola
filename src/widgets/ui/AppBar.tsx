@@ -14,6 +14,7 @@ import {
 import { auth } from "@/firebase-config";
 import { Btn } from "@/src/widgets";
 import { SignIn, SignUp } from "@/src/services/auth";
+import Color from "@/src/styles/globals";
 
 /** == [ properties ]
  * == == == == == == == == == */
@@ -21,7 +22,7 @@ import { SignIn, SignUp } from "@/src/services/auth";
 
 /** == [ exports ]
  * == == == == == == == == == */
-export default function index( { ...props } ) {
+export default function AppBar( { ...props } ) {
    const 
       [ Email, setEmail ] = useState<string>("")
       ,
@@ -30,31 +31,6 @@ export default function index( { ...props } ) {
 
    return( <>
       <View style={ s.sheet }>
-         <View style={ s.Inputs }>
-            <TextInput 
-               value={ Email } inputMode="email"
-               onChangeText={ setEmail }
-               placeholder="Email"
-               style={ s.Input }
-               placeholderTextColor="#999"
-            />
-            <TextInput 
-               value={ Password } inputMode="decimal"
-               secureTextEntry={ true }
-               onChangeText={ setPassword }
-               placeholder="Password"
-               style={ s.Input }
-               placeholderTextColor="#999"
-            />
-         </View>
-         <View style={[ s.Inputs, { width: "80%" } ]}>
-            <Btn title="log in" 
-               onPress={ () => SignIn( Email, Password ) }
-            />
-            <Btn title="register" bg="#fc0" 
-               onPress={ () => SignUp( Email, Password ) }
-            />
-         </View>
       </View>
    </> );
 }
@@ -70,9 +46,9 @@ const
          justifyContent: "center",
          backgroundColor: "#1B1D22",
       },
-      Inputs: {
+      AppBar: {
          width: "100%",
-         gap: 16,
+         backgroundColor: Color.AppBar.light,
          marginVertical: 16,
          alignItems: "center",
          justifyContent: "center",

@@ -1,6 +1,3 @@
-import Btn from "./btn";
 
 
-export {
-   Btn,
-};
+export { Btn } from "@/src/widgets/elements/btn";
